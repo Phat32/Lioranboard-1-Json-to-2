@@ -158,7 +158,6 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                 case 53:
                 case 54:
                 case 55:
-                case 56:
                 case 69:
                 case 70:
                 case 71:
@@ -174,6 +173,7 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                 case 142:
                 case 146:
                 case 150:
+                case 151:
                 case 170:
                 case 190:
                 case 227:
@@ -435,6 +435,7 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                 case 46:
                 case 48:
                 case 50:
+                case 56:
                 case 57:
                 case 58:
                 case 59:
@@ -442,6 +443,7 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                 case 72:
                 case 79:
                 case 80:
+                case 81:
                 case 82:
                 case 83:
                 case 84:
@@ -470,6 +472,7 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                 case 153:
                 case 158:
                 case 163:
+                case 168:
                 case 220:
                     b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<string>();
                     b1 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<string>();
@@ -495,6 +498,7 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
 
                 case 44:
                 case 51:
+                case 103:
                     b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<string>();
                     v0 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue2_{position}"));
                     break;
@@ -515,6 +519,18 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                     b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<string>();
                     b1 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<string>();
                     b2 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<string>();
+                    break;
+
+                case 67:
+                    b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<string>();
+                    b1 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<string>();
+                    b2 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<string>();
+                    b3 = lb1JObject.GetValue($"websocketvalue4_{position}").Value<string>();
+                    b4 = lb1JObject.GetValue($"websocketvalue5_{position}").Value<string>();
+                    b5 = lb1JObject.GetValue($"websocketvalue6_{position}").Value<string>();
+                    b6 = lb1JObject.GetValue($"websocketvalue7_{position}").Value<string>();
+                    b7 = lb1JObject.GetValue($"websocketvalue8_{position}").Value<string>();
+                    v0 = 0;
                     break;
 
                 case 74:
@@ -1304,3 +1320,4 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
         }
     }
 }
+
