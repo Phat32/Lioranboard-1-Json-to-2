@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lioranboard 1 Json to 2", "Lioranboard 1 Json to 2\Lioranboard 1 Json to 2.csproj", "{378E4EB0-F19D-43EB-A471-F18459828465}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{378E4EB0-F19D-43EB-A471-F18459828465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{378E4EB0-F19D-43EB-A471-F18459828465}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{378E4EB0-F19D-43EB-A471-F18459828465}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{378E4EB0-F19D-43EB-A471-F18459828465}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7BF4527-5AA8-4108-B1A5-98FB9847CCEE}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,33 @@
+﻿<Window x:Class="Lioranboard_1_Json_to_2.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:vm="clr-namespace:Lioranboard_1_Json_to_2.ViewModels"
+        d:DataContext="{d:DesignInstance vm:MainWindowViewModel, IsDesignTimeCreatable=True}"
+
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Lioranboard 1 JSON" />
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Padding="2" Text="{Binding Lb1Json, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Button Grid.Row="2" Grid.Column="1" Content="Convert JSON" Padding="5,2,5,2" Command="{Binding ConvertJsonCommand}" />
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="Converted Lioranboard 2 JSON" />
+        <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Padding="2" Text="{Binding Lb2Json, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+    </Grid>
+</Window>
