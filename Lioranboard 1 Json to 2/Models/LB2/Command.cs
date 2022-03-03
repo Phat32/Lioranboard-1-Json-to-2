@@ -621,6 +621,7 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                 case 93:
                 case 94:
                 case 117:
+                case 124:
                 case 125:
                 case 126:
                 case 127:
