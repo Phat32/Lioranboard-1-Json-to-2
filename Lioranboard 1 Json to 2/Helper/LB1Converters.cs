@@ -204,11 +204,11 @@ namespace Lioranboard_1_Json_to_2.Helper
 
                 //String: Length
                 case 48:
-                    return 84;
+                    return 83;
 
                 //String: Digits
                 case 49:
-                    return 83;
+                    return 84;
 
                 //String: Lower Case
                 case 50:

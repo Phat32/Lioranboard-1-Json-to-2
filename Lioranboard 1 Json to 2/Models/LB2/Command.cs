@@ -247,8 +247,8 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                     b58 = "==";
                     b59 = "";
 
-                    v0 = lb1JObject.GetValue($"websocketvalue4_{position}").Value<int>();
-                    v1 = lb1JObject.GetValue($"websocketvalue5_{position}").Value<int>();
+                    v0 = Parser.GetInt(lb1JObject.GetValue($"websocketvalue4_{position}"));
+                    v1 = Parser.GetInt(lb1JObject.GetValue($"websocketvalue5_{position}"));
                     v2 = 1;
                     v3 = 0;
                     v4 = 0;
@@ -362,7 +362,7 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                 case 9:
                     b0 = lb1JObject.GetValue($"websocketvalue5_{position}").Value<string>();
                     b1 = lb1JObject.GetValue($"websocketvalue6_{position}").Value<string>();
-                    v0 = lb1JObject.GetValue($"websocketvalue4_{position}").Value<int>();
+                    v0 = Parser.GetInt(lb1JObject.GetValue($"websocketvalue4_{position}"));
                     break;
 
                 case 19:
@@ -370,14 +370,14 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                     b1 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<string>();
                     b2 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<string>();
                     b3 = lb1JObject.GetValue($"websocketvalue5_{position}").Value<string>();
-                    v0 = lb1JObject.GetValue($"websocketvalue4_{position}").Value<bool>();
+                    v0 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue4_{position}"));
                     v1 = 0;
                     break;
 
                 case 20:
                     b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<string>();
                     b1 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<string>();
-                    v0 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<bool>();
+                    v0 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue3_{position}"));
                     break;
 
                 case 23:
@@ -389,7 +389,7 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                     b4 = lb1JObject.GetValue($"websocketvalue5_{position}").Value<string>();
                     b5 = lb1JObject.GetValue($"websocketvalue6_{position}").Value<string>();
                     b6 = lb1JObject.GetValue($"websocketvalue7_{position}").Value<string>();
-                    v0 = lb1JObject.GetValue($"websocketvalue8_{position}").Value<int>();
+                    v0 = Parser.GetInt(lb1JObject.GetValue($"websocketvalue8_{position}"));
                     break;
 
                 case 24:
@@ -400,7 +400,7 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                     b4 = lb1JObject.GetValue($"websocketvalue5_{position}").Value<string>();
                     b5 = lb1JObject.GetValue($"websocketvalue6_{position}").Value<string>();
                     b6 = lb1JObject.GetValue($"websocketvalue7_{position}").Value<string>();
-                    b7 = lb1JObject.GetValue($"websocketvalue8_{position}").Value<int>();
+                    b7 = Parser.GetInt(lb1JObject.GetValue($"websocketvalue8_{position}"));
                     v0 = 0;
                     break;
 
@@ -419,9 +419,9 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                     v0 = int.Parse(border);
                     v1 = true;
 
-                    var red = lb1JObject.GetValue($"websocketvalue2_{position}").Value<int>();
-                    var green = lb1JObject.GetValue($"websocketvalue3_{position}").Value<int>();
-                    var blue = lb1JObject.GetValue($"websocketvalue4_{position}").Value<int>();
+                    var red = Parser.GetInt(lb1JObject.GetValue($"websocketvalue2_{position}"));
+                    var green = Parser.GetInt(lb1JObject.GetValue($"websocketvalue3_{position}"));
+                    var blue = Parser.GetInt(lb1JObject.GetValue($"websocketvalue4_{position}"));
 
                     var color = Color.FromRgb((byte)red, (byte)green, (byte)blue);
                     v2 = color.B * 256 * 256 + color.G * 256 + color.R;
@@ -480,7 +480,7 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                     b1 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<string>();
                     b2 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<string>();
                     b3 = lb1JObject.GetValue($"websocketvalue4_{position}").Value<string>();
-                    v0 = lb1JObject.GetValue($"websocketvalue5_{position}").Value<int>();
+                    v0 = Parser.GetInt(lb1JObject.GetValue($"websocketvalue5_{position}"));
                     break;
 
                 case 40:
@@ -490,13 +490,13 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                     b2 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<string>();
                     b3 = lb1JObject.GetValue($"websocketvalue4_{position}").Value<string>();
                     b4 = lb1JObject.GetValue($"websocketvalue5_{position}").Value<string>();
-                    v0 = lb1JObject.GetValue($"websocketvalue6_{position}").Value<int>();
+                    v0 = Parser.GetInt(lb1JObject.GetValue($"websocketvalue6_{position}"));
                     break;
 
                 case 44:
                 case 51:
                     b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<string>();
-                    v0 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<bool>();
+                    v0 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue2_{position}"));
                     break;
 
                 case 47:
@@ -504,11 +504,12 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                     b1 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<string>();
                     b2 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<string>();
                     b3 = lb1JObject.GetValue($"websocketvalue4_{position}").Value<string>();
-                    v0 = lb1JObject.GetValue($"websocketvalue5_{position}").Value<bool>();
+                    v0 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue5_{position}"));
                     break;
 
                 case 37:
                 case 65:
+                case 92:
                 case 129:
                 case 130:
                     b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<string>();
@@ -518,16 +519,16 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
 
                 case 74:
                     b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<string>();
-                    v0 = lb1JObject.GetValue($"websocketvalue4_{position}").Value<bool>();
-                    v1 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<bool>();
-                    v2 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<bool>();
+                    v0 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue4_{position}"));
+                    v1 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue3_{position}"));
+                    v2 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue2_{position}"));
                     break;
 
                 case 77:
                     b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<string>();
                     b1 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<string>();
                     b2 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<string>();
-                    v0 = lb1JObject.GetValue($"websocketvalue4_{position}").Value<bool>();
+                    v0 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue4_{position}"));
                     break;
 
                 case 108:
@@ -537,7 +538,7 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                 case 122:
                     b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<string>();
                     b1 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<string>();
-                    v0 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<int>();
+                    v0 = Parser.GetInt(lb1JObject.GetValue($"websocketvalue3_{position}"));
                     break;
 
                 case 29:
@@ -557,20 +558,20 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
 
                 case 133:
                     b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<string>();
-                    v0 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<bool>();
-                    v1 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<bool>();
-                    v2 = lb1JObject.GetValue($"websocketvalue4_{position}").Value<bool>();
+                    v0 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue2_{position}"));
+                    v1 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue3_{position}"));
+                    v2 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue4_{position}"));
                     break;
 
                 case 138:
-                    b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<bool>();
-                    v0 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<bool>();
-                    v1 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<bool>();
-                    v2 = lb1JObject.GetValue($"websocketvalue4_{position}").Value<bool>();
-                    v3 = lb1JObject.GetValue($"websocketvalue5_{position}").Value<bool>();
-                    v4 = lb1JObject.GetValue($"websocketvalue6_{position}").Value<bool>();
-                    v5 = lb1JObject.GetValue($"websocketvalue7_{position}").Value<bool>();
-                    v6 = lb1JObject.GetValue($"websocketvalue8_{position}").Value<bool>();
+                    b0 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue1_{position}"));
+                    v0 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue2_{position}"));
+                    v1 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue3_{position}"));
+                    v2 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue4_{position}"));
+                    v3 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue5_{position}"));
+                    v4 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue6_{position}"));
+                    v5 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue7_{position}"));
+                    v6 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue8_{position}"));
                     v7 = false;
                     break;
 
@@ -642,14 +643,14 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                     break;
 
                 case 149:
-                    v0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<bool>();
+                    v0 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue1_{position}"));
                     break;
 
                 case 75:
                 case 159:
                     b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<string>();
                     b1 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<string>();
-                    v0 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<int>();
+                    v0 = Parser.GetInt(lb1JObject.GetValue($"websocketvalue3_{position}"));
                     break;
 
                 case 167:
@@ -659,8 +660,8 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
 
                 case 189:
                     b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<string>();
-                    v0 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<bool>();
-                    v1 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<bool>();
+                    v0 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue2_{position}"));
+                    v1 = Parser.GetBool(lb1JObject.GetValue($"websocketvalue3_{position}"));
                     break;
 
                 case 217:
