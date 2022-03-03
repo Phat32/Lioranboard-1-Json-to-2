@@ -9,8 +9,8 @@
         d:DataContext="{d:DesignInstance vm:MainWindowViewModel, IsDesignTimeCreatable=True}"
 
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Lioranboard 1 Json to 2" Height="800" Width="450">
+    <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
@@ -24,10 +24,12 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="Lioranboard 1 JSON" />
-        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Padding="2" Text="{Binding Lb1Json, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Lioranboard 1 JSON" TextAlignment="Center" FontWeight="Bold" />
+        <TextBox x:Name="LB1Box" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Padding="2" Text="{Binding Lb1Json, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" TextWrapping="Wrap"
+                 AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto" GotFocus="LB1Box_OnGotFocus" MouseDoubleClick="LB1Box_OnMouseDoubleClick" PreviewMouseLeftButtonDown="LB1Box_OnPreviewMouseLeftButtonDown"/>
         <Button Grid.Row="2" Grid.Column="1" Content="Convert JSON" Padding="5,2,5,2" Command="{Binding ConvertJsonCommand}" />
-        <TextBlock Grid.Row="3" Grid.Column="1" Text="Converted Lioranboard 2 JSON" />
-        <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Padding="2" Text="{Binding Lb2Json, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="Converted Lioranboard 2 JSON" FontWeight="Bold" />
+        <TextBox x:Name="LB2Box" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Padding="2" Text="{Binding Lb2Json, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"
+                 IsReadOnly="True" VerticalScrollBarVisibility="Auto" GotFocus="LB2Box_OnGotFocus" MouseDoubleClick="LB2Box_OnMouseDoubleClick" PreviewMouseLeftButtonDown="LB2Box_OnPreviewMouseLeftButtonDown" />
     </Grid>
 </Window>
