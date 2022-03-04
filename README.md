@@ -5,7 +5,7 @@ A WPF tool to convert the exported JSON from Lioranboard 1 to the format used in
 So far it seems to be working as expected but not everything has been fully tested. Please save often and check the buttons in LB2 before going too far and please report any issues you run across
 
 # Usage
-Super simple, download the latest [release](https://github.com/Phat32/Lioranboard-1-Json-to-2/releases) (currently 0.0.9 at time of writing)
+Super simple, download the latest [release](https://github.com/Phat32/Lioranboard-1-Json-to-2/releases) (currently 0.0.10 at time of writing)
 
 Extract the contents and run **Lioranboard 1 Json to 2.exe**
 
