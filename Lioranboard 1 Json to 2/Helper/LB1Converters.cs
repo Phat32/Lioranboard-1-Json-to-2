@@ -313,7 +313,7 @@ namespace Lioranboard_1_Json_to_2.Helper
 
                 //Stack: Pull
                 case 75:
-                    return 0;
+                    return 98;
 
                 //Stack: Peek
                 case 76:
