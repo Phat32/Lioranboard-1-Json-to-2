@@ -65,5 +65,14 @@ namespace Lioranboard_1_Json_to_2.Views
                 LB1Box.Focus();
             }
         }
+
+        private void LB1Box_OnKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                LB2Box.Focus();
+                (DataContext as MainWindowViewModel).ConvertJsonCommand.Execute();
+            }
+        }
     }
 }

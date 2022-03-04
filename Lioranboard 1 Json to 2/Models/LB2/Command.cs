@@ -625,6 +625,14 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                     b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<string>();
                     b1 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<string>();
                     v0 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<string>() == "true";
+
+                    if (string.IsNullOrWhiteSpace(b1.ToString()))
+                    {
+                        b1 = "0";
+                    }
+
+                    dis = 1;
+
                     break;
 
                 case 133:

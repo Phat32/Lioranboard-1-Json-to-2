@@ -28,7 +28,8 @@
 
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Text="Lioranboard 1 JSON" TextAlignment="Center" FontWeight="Bold" />
         <TextBox x:Name="LB1Box" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Padding="2" Text="{Binding Lb1Json, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" TextWrapping="Wrap"
-                 AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto" GotFocus="LB1Box_OnGotFocus" MouseDoubleClick="LB1Box_OnMouseDoubleClick" PreviewMouseLeftButtonDown="LB1Box_OnPreviewMouseLeftButtonDown"/>
+                 VerticalScrollBarVisibility="Auto" GotFocus="LB1Box_OnGotFocus" MouseDoubleClick="LB1Box_OnMouseDoubleClick" PreviewMouseLeftButtonDown="LB1Box_OnPreviewMouseLeftButtonDown"
+                 KeyUp="LB1Box_OnKeyUp"/>
 
         <CheckBox Grid.Row="2" Grid.Column="4" VerticalAlignment="Center" 
                   IsChecked="{Binding ShowConvertedPopup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
