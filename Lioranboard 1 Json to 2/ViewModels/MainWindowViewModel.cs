@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Lioranboard_1_Json_to_2.Classes.LB2;
+using Lioranboard_1_Json_to_2.Helper;
 using Newtonsoft.Json.Linq;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -333,6 +334,18 @@ namespace Lioranboard_1_Json_to_2.ViewModels
                     var command = new Command();
                     command.SoundStopCommand(lb1JObject, Lb2Button.command_list.Count);
                     Lb2Button.command_list.Add(command);
+                }
+
+                if (lb1JObject.ContainsKey("switchdeck"))
+                {
+                    if (Parser.GetInt(lb1JObject.GetValue("switchdeck")) == -1)
+                    {
+                        Lb2Button.switch_deck = "Next Deck";
+                    }
+                    else if (Parser.GetInt(lb1JObject.GetValue("switchdeck")) == -2)
+                    {
+                        Lb2Button.switch_deck = "Previous Deck";
+                    }
                 }
 
                 Lb2Json = JObject.FromObject(Lb2Button).ToString();
