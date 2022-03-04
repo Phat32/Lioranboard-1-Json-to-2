@@ -21,6 +21,18 @@ namespace Lioranboard_1_Json_to_2.Helper
             }
         }
 
+        public static double GetDouble(JToken token)
+        {
+            try
+            {
+                return double.Parse(token.Value<string>());
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
         public static bool GetBool(JToken token)
         {
             try

@@ -72,6 +72,18 @@ namespace Lioranboard_1_Json_to_2.ViewModels
                     triggerCount++;
                 }
 
+                var keyPressCount = 1;
+                while (lb1JObject.ContainsKey($"press{keyPressCount}"))
+                {
+                    keyPressCount++;
+                }
+
+                var soundCount = 1;
+                while (lb1JObject.ContainsKey($"sound_path{soundCount}"))
+                {
+                    soundCount++;
+                }
+
                 for (int i = 0; i < commandCount; i++)
                 {
                     var command = new Command(lb1JObject, i);
@@ -292,6 +304,35 @@ namespace Lioranboard_1_Json_to_2.ViewModels
                     }
 
                     Lb2Button.triggers.Add(trigger);
+                }
+
+                for (int i = 1; i < keyPressCount; i++)
+                {
+                    var command = new Command();
+                    command.KeyboardCommand(lb1JObject, i, Lb2Button.command_list.Count);
+
+                    Lb2Button.command_list.Add(command);
+                }
+
+                for (int i = 1; i < soundCount; i++)
+                {
+                    var command = new Command();
+                    command.SoundCommand(lb1JObject, i, Lb2Button.command_list.Count);
+                    Lb2Button.command_list.Add(command);
+
+                    if (lb1JObject.GetValue($"soundpitch{i}").Value<int>() != 100)
+                    {
+                        var speedCommand = new Command();
+                        speedCommand.SoundSpeedCommand(lb1JObject, i, Lb2Button.command_list.Count);
+                        Lb2Button.command_list.Add(speedCommand);
+                    }
+                }
+
+                if (lb1JObject.ContainsKey("stopsoundfade"))
+                {
+                    var command = new Command();
+                    command.SoundStopCommand(lb1JObject, Lb2Button.command_list.Count);
+                    Lb2Button.command_list.Add(command);
                 }
 
                 Lb2Json = JObject.FromObject(Lb2Button).ToString();

@@ -129,6 +129,38 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
             InitializeCommand(lb1JObject, position);
         }
 
+        public void KeyboardCommand(JObject lb1JObject, int index, int position)
+        {
+            cmd = 3;
+            ms = Parser.GetInt(lb1JObject.GetValue($"pressdelay{index}"));
+            pos = position;
+            InitializeCommand(lb1JObject, index);
+        }
+
+        public void SoundCommand(JObject lb1JObject, int index, int position)
+        {
+            cmd = 2;
+            ms = Parser.GetInt(lb1JObject.GetValue($"sounddelay{index}"));
+            pos = position;
+            InitializeCommand(lb1JObject, index);
+        }
+
+        public void SoundSpeedCommand(JObject lb1JObject, int index, int position)
+        {
+            cmd = 191;
+            ms = Parser.GetInt(lb1JObject.GetValue($"sounddelay{index}"));
+            pos = position;
+            InitializeCommand(lb1JObject, index);
+        }
+
+        public void SoundStopCommand(JObject lb1JObject, int position)
+        {
+            cmd = 146;
+            ms = Parser.GetInt(lb1JObject.GetValue("stopsoundfade"));
+            pos = position;
+            InitializeCommand(lb1JObject, 0);
+        }
+
         private void InitializeCommand(JObject lb1JObject, int position)
         {
             switch (cmd)
@@ -171,13 +203,36 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                 case 136:
                 case 137:
                 case 142:
-                case 146:
                 case 150:
                 case 151:
                 case 170:
                 case 190:
                 case 227:
                     b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<string>();
+                    break;
+
+                case 146:
+                    b0 = "all";
+                    break;
+
+                case 2:
+                    b0 = lb1JObject.GetValue($"sound_path{position}").Value<string>();
+                    b1 = $"sound{position}";
+                    v0 = Parser.GetDouble(lb1JObject.GetValue($"volume{position}"));
+                    break;
+
+                case 191:
+                    b0 = $"sound{position}";
+                    b1 = lb1JObject.GetValue($"soundpitch{position}").Value<string>();
+                    break;
+
+                case 3:
+                    
+                    b0 = lb1JObject.GetValue($"pressduration{position}").Value<string>();
+                    v0 = Parser.GetInt(lb1JObject.GetValue($"press{position}"));
+                    v1 = false;
+                    v2 = false;
+                    v3 = false;
                     break;
 
                 case 6:
