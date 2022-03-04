@@ -11,6 +11,10 @@ using Lioranboard_1_Json_to_2.Helper;
 using Newtonsoft.Json.Linq;
 using Prism.Commands;
 using Prism.Mvvm;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Position;
+using ToastNotifications.Messages;
 
 namespace Lioranboard_1_Json_to_2.ViewModels
 {
@@ -53,12 +57,35 @@ namespace Lioranboard_1_Json_to_2.ViewModels
         public bool ShowConvertedPopup
         {
             get => _showConvertedPopup;
-            set => SetProperty(ref _showConvertedPopup, value);
+            set
+            {
+                SetProperty(ref _showConvertedPopup, value);
+
+                if (_showConvertedPopup == false)
+                {
+                    _notifier.ShowWarning("Please remember to double check your buttons in LB2 when importing them");
+                }
+            } 
         }
 
         public DelegateCommand ConvertJsonCommand => _convertJsonCommand;
 
         public DelegateCommand ClearJsonCommand => _clearJsonCommand;
+
+        Notifier _notifier = new Notifier(cfg =>
+        {
+            cfg.PositionProvider = new WindowPositionProvider(
+                parentWindow: Application.Current.MainWindow,
+                corner: Corner.BottomRight,
+                offsetX: 10,
+                offsetY: 10);
+
+            cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                notificationLifetime: TimeSpan.FromSeconds(3),
+                maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+            cfg.Dispatcher = Application.Current.Dispatcher;
+        });
 
         private void OnConvertJson()
         {
@@ -365,6 +392,12 @@ namespace Lioranboard_1_Json_to_2.ViewModels
 
                 Lb2Json = JObject.FromObject(Lb2Button).ToString();
 
+                Clipboard.Clear();
+                Clipboard.SetText(Lb2Json, TextDataFormat.Text);
+
+                _notifier.ShowSuccess("JSON Successfully Converted");
+                _notifier.ShowInformation("JSON copied to Clipboard");
+
                 if (ShowConvertedPopup)
                 {
                     MessageBox.Show("Button converted! (not all functions are supported, please double check the button once imported).\r\n\r\n Please be aware that the Button ID will not import and will take whatever the next available ID is. Please go into the button to edit the ID as needed.", "LB1 to LB2 Success!", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -372,6 +405,7 @@ namespace Lioranboard_1_Json_to_2.ViewModels
             }
             catch (Exception ex)
             {
+                _notifier.ShowError("Error occurred during the Conversion");
                 MessageBox.Show("There was an error processing the LB1 JSON. Please check the export and try again",
                     "Error Parsing LB1 JSON", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -382,6 +416,8 @@ namespace Lioranboard_1_Json_to_2.ViewModels
             Lb1Json = string.Empty;
             Lb2Json = string.Empty;
             Lb2Button = new Lb2Button();
+
+            _notifier.ShowInformation("JSON Cleared");
         }
     }
 }
