@@ -19,12 +19,17 @@ namespace Lioranboard_1_Json_to_2.ViewModels
         private Lb2Button _lb2Button;
         private string _lb1Json;
         private string _lb2Json;
+        private bool _showConvertedPopup;
+        private readonly DelegateCommand _convertJsonCommand;
+        private readonly DelegateCommand _clearJsonCommand;
 
         public MainWindowViewModel()
         {
-            ConvertJsonCommand = new DelegateCommand(OnConvertJson);
+            _convertJsonCommand = new DelegateCommand(OnConvertJson);
+            _clearJsonCommand = new DelegateCommand(OnClearJson);
 
             Lb2Button = new Lb2Button();
+            ShowConvertedPopup = true;
         }
 
         public string Lb1Json
@@ -45,7 +50,15 @@ namespace Lioranboard_1_Json_to_2.ViewModels
             set => SetProperty(ref _lb2Button, value);
         }
 
-        public DelegateCommand ConvertJsonCommand { get; }
+        public bool ShowConvertedPopup
+        {
+            get => _showConvertedPopup;
+            set => SetProperty(ref _showConvertedPopup, value);
+        }
+
+        public DelegateCommand ConvertJsonCommand => _convertJsonCommand;
+
+        public DelegateCommand ClearJsonCommand => _clearJsonCommand;
 
         private void OnConvertJson()
         {
@@ -352,13 +365,23 @@ namespace Lioranboard_1_Json_to_2.ViewModels
 
                 Lb2Json = JObject.FromObject(Lb2Button).ToString();
 
-                MessageBox.Show("Button converted! (not all functions are supported, please double check the button once imported).\r\n\r\n Please be aware that the Button ID will not import and will take whatever the next available ID is. Please go into the button to edit the ID as needed.", "LB1 to LB2 Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                if (ShowConvertedPopup)
+                {
+                    MessageBox.Show("Button converted! (not all functions are supported, please double check the button once imported).\r\n\r\n Please be aware that the Button ID will not import and will take whatever the next available ID is. Please go into the button to edit the ID as needed.", "LB1 to LB2 Success!", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("There was an error processing the LB1 JSON. Please check the export and try again",
                     "Error Parsing LB1 JSON", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void OnClearJson()
+        {
+            Lb1Json = string.Empty;
+            Lb2Json = string.Empty;
+            Lb2Button = new Lb2Button();
         }
     }
 }
