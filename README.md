@@ -6,7 +6,5 @@ Super simple still a work in progress tool. Export your button from LB1 and past
 There are still errors that happen and things not fully implemented yet, but they should be finished in the next day or 2.
 
 NOT YET IMPLEMENTED:
-- Keyboard Macros
-- Sounds Effects + Sound Mod
 - Deck Switching from the button
 - Drag Press
