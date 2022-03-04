@@ -334,8 +334,7 @@ namespace Lioranboard_1_Json_to_2.Helper
 
                 //Stack: Clear
                 case 80:
-                    //TODO: Logic to clear array, probably just re-create array
-                    return 0;
+                    return 17;
 
                 //Stack: Find(old)
                 case 81:
