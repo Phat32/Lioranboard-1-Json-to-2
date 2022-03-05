@@ -4,12 +4,9 @@ using System.Windows;
 using Lioranboard_1_Json_to_2.Classes.LB2;
 using Lioranboard_1_Json_to_2.Helper;
 using Newtonsoft.Json.Linq;
+using Notifications.Wpf;
 using Prism.Commands;
 using Prism.Mvvm;
-using ToastNotifications;
-using ToastNotifications.Lifetime;
-using ToastNotifications.Position;
-using ToastNotifications.Messages;
 
 namespace Lioranboard_1_Json_to_2.ViewModels
 {
@@ -24,8 +21,9 @@ namespace Lioranboard_1_Json_to_2.ViewModels
         {
             ConvertJsonCommand = new DelegateCommand(OnConvertJson);
             ClearJsonCommand = new DelegateCommand(OnClearJson);
+            notificationManager = new NotificationManager();
 
-            Lb2Button = new Lb2Button();
+                Lb2Button = new Lb2Button();
             ShowConvertedPopup = true;
         }
 
@@ -56,7 +54,7 @@ namespace Lioranboard_1_Json_to_2.ViewModels
 
                 if (_showConvertedPopup == false)
                 {
-                    _notifier.ShowWarning("Please remember to double check your buttons in LB2 when importing them");
+                    ToastAlert("Keep in mind","Please remember to double check your buttons in LB2 after importing them", NotificationType.Warning);
                 }
             } 
         }
@@ -65,20 +63,14 @@ namespace Lioranboard_1_Json_to_2.ViewModels
 
         public DelegateCommand ClearJsonCommand { get; }
 
-        private readonly Notifier _notifier = new Notifier(cfg =>
+        private NotificationManager notificationManager;
+
+        private void ToastAlert(string title, string message, NotificationType type  = NotificationType.Information)
         {
-            cfg.PositionProvider = new WindowPositionProvider(
-                parentWindow: Application.Current.MainWindow,
-                corner: Corner.BottomRight,
-                offsetX: 10,
-                offsetY: 10);
-
-            cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
-                notificationLifetime: TimeSpan.FromSeconds(3),
-                maximumNotificationCount: MaximumNotificationCount.FromCount(5));
-
-            cfg.Dispatcher = Application.Current.Dispatcher;
-        });
+            notificationManager.Show(
+                new NotificationContent { Title = title, Message = message, Type = type},
+                areaName: "WindowArea");
+        }
 
         private void OnConvertJson()
         {
@@ -319,11 +311,18 @@ namespace Lioranboard_1_Json_to_2.ViewModels
 
                 Lb2Json = JObject.FromObject(Lb2Button).ToString();
 
-                Clipboard.Clear();
-                Clipboard.SetText(Lb2Json, TextDataFormat.Text);
+                ToastAlert("Success", "JSON Successfully Converted", NotificationType.Success);
 
-                _notifier.ShowSuccess("JSON Successfully Converted");
-                _notifier.ShowInformation("JSON copied to Clipboard");
+                try
+                {
+                    Clipboard.Clear();
+                    Clipboard.SetText(Lb2Json, TextDataFormat.Text);
+                    ToastAlert("FYI", "LB2 JSON copied to Clipboard");
+                }
+                catch (Exception)
+                {
+                    ToastAlert("Uh-oh...","There was an error copying the LB2 JSON to the Clipboard. Please highlight and copy the LB2 JSON manually.", NotificationType.Error);
+                }
 
                 if (ShowConvertedPopup)
                 {
@@ -332,7 +331,7 @@ namespace Lioranboard_1_Json_to_2.ViewModels
             }
             catch (Exception)
             {
-                _notifier.ShowError("Error occurred during the Conversion");
+                ToastAlert("Something is wrong","Error occurred during the Conversion", NotificationType.Error);
                 MessageBox.Show("There was an error processing the LB1 JSON. Please check the export and try again",
                     "Error Parsing LB1 JSON", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -343,8 +342,6 @@ namespace Lioranboard_1_Json_to_2.ViewModels
             Lb1Json = string.Empty;
             Lb2Json = string.Empty;
             Lb2Button = new Lb2Button();
-
-            _notifier.ShowInformation("JSON Cleared");
         }
     }
 }
