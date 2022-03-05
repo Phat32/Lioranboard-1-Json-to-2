@@ -67,17 +67,17 @@ namespace Lioranboard_1_Json_to_2.Helper
                 //Toggle Replay Buffer
                 case 13:
                     //Removed from LB2
-                    return -1;
+                    return -11;
 
                 //Start Replay Buffer
                 case 14:
                     //Removed from LB2
-                    return -1;
+                    return -12;
 
                 //Stop Replay Buffer
                 case 15:
                     //Removed from LB2
-                    return -1;
+                    return -13;
 
                 //Pause Recording
                 case 16:
@@ -184,11 +184,11 @@ namespace Lioranboard_1_Json_to_2.Helper
 
                 //String: Replace
                 case 43:
-                    return 87;
+                    return 88;
 
-                //TODO: Identify
+                //Math: Set Variable to Variable
                 case 44:
-                    return 0;
+                    return -7;
 
                 //TODO: Identify
                 case 45:
@@ -273,7 +273,7 @@ namespace Lioranboard_1_Json_to_2.Helper
                 //OBS Pull Filter Visibility
                 case 65:
                     //Removed, replace with logic using Fetch OBS Data
-                    return 0;
+                    return -10;
 
                 //String: Position
                 case 66:
@@ -334,7 +334,7 @@ namespace Lioranboard_1_Json_to_2.Helper
 
                 //Stack: Clear
                 case 80:
-                    return 17;
+                    return 78;
 
                 //Stack: Find(old)
                 case 81:
@@ -371,7 +371,7 @@ namespace Lioranboard_1_Json_to_2.Helper
                 //Save Replay Buffer
                 case 89:
                     //Removed from LB2
-                    return -1;
+                    return -14;
 
                 //String: Count
                 case 90:
@@ -395,7 +395,7 @@ namespace Lioranboard_1_Json_to_2.Helper
 
                 //Compare: Redo Previous if
                 case 95:
-                    return 0;
+                    return -6;
 
                 //TODO: Identify
                 case 96:
@@ -412,7 +412,7 @@ namespace Lioranboard_1_Json_to_2.Helper
                 //String: Get Trigger Type
                 case 99:
                     //Replaced by 66
-                    return 66;
+                    return -5;
 
                 //String: Escape
                 case 100:
@@ -474,12 +474,12 @@ namespace Lioranboard_1_Json_to_2.Helper
                 //Set Transition Bar Position
                 case 114:
                     //Removed from LB2, replaced by Transition Duration
-                    return -1;
+                    return -9;
 
                 //Release Transition Bar
                 case 115:
                     //Removed from LB2, replaced by Transition Duration
-                    return -1;
+                    return -8;
 
                 //Trigger OBS Hotkey Sequence
                 case 116:
@@ -648,7 +648,7 @@ namespace Lioranboard_1_Json_to_2.Helper
 
                 //Get Alternate Account Info
                 case 156:
-                    return 0;
+                    return 105;
 
                 //Unknown
                 default:

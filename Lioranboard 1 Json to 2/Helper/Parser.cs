@@ -44,5 +44,29 @@ namespace Lioranboard_1_Json_to_2.Helper
                 return false;
             }
         }
+
+        public static string GetRemoveVariableSign(JToken token)
+        {
+            try
+            {
+                return token.Value<string>().Replace("/$","").Replace("$/","");
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+        }
+
+        public static string GetAddVariableSign(JToken token)
+        {
+            try
+            {
+                return $"/${token.Value<string>()}$/";
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+        }
     }
 }
