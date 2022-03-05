@@ -5,7 +5,7 @@ A WPF tool to convert the exported JSON from Lioranboard 1 to the format used in
 So far it seems to be working as expected but not everything has been fully tested. Please save often and check the buttons in LB2 before going too far and please report any issues you run across
 
 # Usage
-Super simple, download the latest [release](https://github.com/Phat32/Lioranboard-1-Json-to-2/releases) (currently 0.0.9 at time of writing)
+Super simple, download the latest [release](https://github.com/Phat32/Lioranboard-1-Json-to-2/releases) (currently 0.0.10 at time of writing)
 
 Extract the contents and run **Lioranboard 1 Json to 2.exe**
 
@@ -25,7 +25,7 @@ With the exported button in your clipboard, paste that into the top text box abo
 ![Screenshot of the copied JSON in LB1to2](https://user-images.githubusercontent.com/10120690/156736684-aa2c5d1e-102c-4ea1-a603-cf8b8a54b3bc.png)
 
 
-Just copy the converted JSON (the bottom box is read only) and import the JSON into LB2
+The converted JSON will be automatically copied to your clipboard and displayed in the bottom window. Take this new JSON and import the JSON into LB2
 
 To convert another button either press the Clear JSON button or replace the text in the first box with the new JSON and press convert again, it will replace the text in the converted box.
 
