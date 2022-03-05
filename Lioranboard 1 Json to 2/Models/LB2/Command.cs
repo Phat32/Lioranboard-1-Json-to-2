@@ -161,6 +161,113 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
             InitializeCommand(lb1JObject, 0);
         }
 
+        public void CommentCommand(JObject lb1JObject, int position, string comment)
+        {
+            Initialize();
+
+            cmd = 4;
+            pos = position;
+            b0 = comment;
+            v0 = 0;
+        }
+
+        private void Initialize()
+        {
+            obsid = "Main";
+            vis = 1;
+            ms = 0;
+            sel = 0;
+            dis = 0;
+            xpan = 0;
+            cmd = 0;
+            pos = 0;
+            b0 = null;
+            b1 = null;
+            b2 = null;
+            b3 = null;
+            b4 = null;
+            b4 = null;
+            b5 = null;
+            b6 = null;
+            b7 = null;
+            b8 = null;
+            b9 = null;
+            b10 = null;
+            b11 = null;
+            b12 = null;
+            b13 = null;
+            b14 = null;
+            b15 = null;
+            b16 = null;
+            b17 = null;
+            b18 = null;
+            b19 = null;
+            b20 = null;
+            b21 = null;
+            b22 = null;
+            b23 = null;
+            b24 = null;
+            b25 = null;
+            b26 = null;
+            b27 = null;
+            b28 = null;
+            b29 = null;
+            b30 = null;
+            b31 = null;
+            b32 = null;
+            b33 = null;
+            b34 = null;
+            b35 = null;
+            b36 = null;
+            b37 = null;
+            b38 = null;
+            b39 = null;
+            b40 = null;
+            b41 = null;
+            b42 = null;
+            b43 = null;
+            b44 = null;
+            b45 = null;
+            b46 = null;
+            b47 = null;
+            b48 = null;
+            b49 = null;
+            b50 = null;
+            b51 = null;
+            b52 = null;
+            b53 = null;
+            b54 = null;
+            b55 = null;
+            b56 = null;
+            b57 = null;
+            b58 = null;
+            b59 = null;
+            v0 = null;
+            v1 = null;
+            v2 = null;
+            v3 = null;
+            v4 = null;
+            v4 = null;
+            v5 = null;
+            v6 = null;
+            v7 = null;
+            v8 = null;
+            v9 = null;
+            v10 = null;
+            v11 = null;
+            v12 = null;
+            v13 = null;
+            v14 = null;
+            v15 = null;
+            v16 = null;
+            v17 = null;
+            v18 = null;
+            v19 = null;
+            v20 = null;
+            v21 = null;
+            v22 = null;
+        }
+
         private void InitializeCommand(JObject lb1JObject, int position)
         {
             switch (cmd)
@@ -180,6 +287,33 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                     b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<string>();
                     b1 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<string>();
                     b2 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<string>();
+
+                    switch (b1)
+                    {
+                        case "Multiply":
+                            b1 = "*=";
+                            break;
+                        case "Divide":
+                            b1 = "/=";
+                            break;
+                        case "DIV":
+                            b1 = "div";
+                            break;
+                        case "MOD":
+                            b1 = "mod";
+                            break;
+                        case "cos":
+                            CommentCommand(lb1JObject, position, "cos has been removed and is not supposed by LB2");
+                            break;
+                        case "sin":
+                            CommentCommand(lb1JObject, position, "sin has been removed and is not supposed by LB2");
+                            break;
+                        case "tan":
+                            CommentCommand(lb1JObject, position, "tan has been removed and is not supposed by LB2");
+                            break;
+                    }
+
+
                     break;
 
                 case 1:

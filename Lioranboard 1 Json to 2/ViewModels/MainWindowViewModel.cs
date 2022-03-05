@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using Lioranboard_1_Json_to_2.Classes.LB2;
 using Lioranboard_1_Json_to_2.Helper;
 using Newtonsoft.Json.Linq;
@@ -24,13 +19,11 @@ namespace Lioranboard_1_Json_to_2.ViewModels
         private string _lb1Json;
         private string _lb2Json;
         private bool _showConvertedPopup;
-        private readonly DelegateCommand _convertJsonCommand;
-        private readonly DelegateCommand _clearJsonCommand;
 
         public MainWindowViewModel()
         {
-            _convertJsonCommand = new DelegateCommand(OnConvertJson);
-            _clearJsonCommand = new DelegateCommand(OnClearJson);
+            ConvertJsonCommand = new DelegateCommand(OnConvertJson);
+            ClearJsonCommand = new DelegateCommand(OnClearJson);
 
             Lb2Button = new Lb2Button();
             ShowConvertedPopup = true;
@@ -68,11 +61,11 @@ namespace Lioranboard_1_Json_to_2.ViewModels
             } 
         }
 
-        public DelegateCommand ConvertJsonCommand => _convertJsonCommand;
+        public DelegateCommand ConvertJsonCommand { get; }
 
-        public DelegateCommand ClearJsonCommand => _clearJsonCommand;
+        public DelegateCommand ClearJsonCommand { get; }
 
-        Notifier _notifier = new Notifier(cfg =>
+        private readonly Notifier _notifier = new Notifier(cfg =>
         {
             cfg.PositionProvider = new WindowPositionProvider(
                 parentWindow: Application.Current.MainWindow,
@@ -91,15 +84,9 @@ namespace Lioranboard_1_Json_to_2.ViewModels
         {
             try
             {
-                Lb2Button = new Lb2Button();
                 var lb1JObject = JObject.Parse(Lb1Json);
 
-                Lb2Button.color = lb1JObject.GetValue("color").Value<int>();
-                Lb2Button.text = lb1JObject.GetValue("text").Value<string>();
-                Lb2Button.border = lb1JObject.GetValue("border_size").Value<int>();
-                Lb2Button.button_id = lb1JObject.GetValue("button_id").Value<string>();
-                Lb2Button.group_id = lb1JObject.GetValue("group_id").Value<string>();
-                Lb2Button.image = lb1JObject.GetValue("picture").Value<string>();
+                Lb2Button = new Lb2Button(lb1JObject);
 
                 var commandCount = 0;
                 while (lb1JObject.ContainsKey($"websocketaction{commandCount}"))
@@ -125,7 +112,7 @@ namespace Lioranboard_1_Json_to_2.ViewModels
                     soundCount++;
                 }
 
-                for (int i = 0; i < commandCount; i++)
+                for (var i = 0; i < commandCount; i++)
                 {
                     var command = new Command(lb1JObject, i);
 
@@ -136,6 +123,11 @@ namespace Lioranboard_1_Json_to_2.ViewModels
                     else if (command.cmd == -2 || command.cmd == -3)
                     {
                         var previousCommand = Lb2Button.command_list.LastOrDefault();
+
+                        if (previousCommand == null)
+                        {
+                            continue;
+                        }
 
                         switch (previousCommand.v2)
                         {
@@ -254,19 +246,15 @@ namespace Lioranboard_1_Json_to_2.ViewModels
                                 previousCommand.v22 = command.cmd == -2 ? 2 : 1;
                                 break;
                         }
-                        previousCommand.v2 = (int)previousCommand.v2 + 1;
+
+                        previousCommand.v2 = (int) previousCommand.v2 + 1;
                         previousCommand.v0 = (int) previousCommand.v0 - 1;
                         previousCommand.xpan += 25;
                     }
                     else
                     {
-                        Lb2Button.command_list.Add(new Command
-                        {
-                            cmd = 4,
-                            pos = i,
-                            b0 = "This function from LB1 does not exist in LB2... Or it was a lot of work to make the import and I am lazy.",
-                            v0 = 0
-                        });
+                        command.CommentCommand(lb1JObject, i, "This function from LB1 does not exist in LB2... Or it was a lot of work to make the import and I am lazy.");
+                        Lb2Button.command_list.Add(command);
                     }
                 }
 
@@ -275,79 +263,16 @@ namespace Lioranboard_1_Json_to_2.ViewModels
                     Lb2Button.functions = 65;
                 }
 
-                for (int i = 0; i < triggerCount; i++)
+                for (var i = 0; i < triggerCount; i++)
                 {
-                    var trigger = new Lb2Trigger();
-
-                    switch (lb1JObject.GetValue($"pubsubaction{i}").Value<int>())
+                    var trigger = new Lb2Trigger(lb1JObject, i);
+                    if (trigger.trg  > 0 && !Lb2Button.triggers.Contains(trigger))
                     {
-                        case 0:
-                            trigger.trg = 5;
-                            trigger.minimum = lb1JObject.GetValue($"pubsubbitsmin{i}").Value<int>();
-                            trigger.maximum = lb1JObject.GetValue($"pubsubbitsmax{i}").Value<int>();
-                            break;
-                        case 1:
-                            trigger.trg = 1;
-                            trigger.tier1 = lb1JObject.GetValue($"pubsubsubs{i}").Value<int>() == 1 || lb1JObject.GetValue($"pubsubsubs{i}").Value<int>() == 17 || lb1JObject.GetValue($"pubsubsubs{i}").Value<int>() == 33;
-                            trigger.tier2 = lb1JObject.GetValue($"pubsubsubs{i}").Value<int>() == 2 || lb1JObject.GetValue($"pubsubsubs{i}").Value<int>() == 18 || lb1JObject.GetValue($"pubsubsubs{i}").Value<int>() == 34;
-                            trigger.tier3 = lb1JObject.GetValue($"pubsubsubs{i}").Value<int>() == 3 || lb1JObject.GetValue($"pubsubsubs{i}").Value<int>() == 20 || lb1JObject.GetValue($"pubsubsubs{i}").Value<int>() == 36;
-                            trigger.prime = lb1JObject.GetValue($"pubsubsubs{i}").Value<int>() == 8;
-                            trigger.subgift = lb1JObject.GetValue($"pubsubsubs{i}").Value<int>() == 17 || lb1JObject.GetValue($"pubsubsubs{i}").Value<int>() == 18 || lb1JObject.GetValue($"pubsubsubs{i}").Value<int>() == 20;
-                            trigger.anonsubgift = lb1JObject.GetValue($"pubsubsubs{i}").Value<int>() == 33 || lb1JObject.GetValue($"pubsubsubs{i}").Value<int>() == 34 || lb1JObject.GetValue($"pubsubsubs{i}").Value<int>() == 36;
-                            trigger.minimum = 1;
-                            trigger.maximum = 2;
-                            break;
-                        case 2:
-                            trigger.trg = 3;
-                            trigger.redeemname = lb1JObject.GetValue($"pubsubredeem{i}").Value<string>();
-                            trigger.message = "*";
-                            trigger.requireinput = false;
-                            trigger.allow_empty_wildcard = false;
-                            trigger.case_sensitive = false;
-                            break;
-                        case 3:
-                            trigger.trg = 0;
-                            trigger.sub = lb1JObject.GetValue($"pubsubchattype{i}").Value<int>() == 4;
-                            trigger.case_sensitive = lb1JObject.GetValue($"pubsubchattype{i}").Value<int>() == 32 || lb1JObject.GetValue($"pubsubchattype{i}").Value<int>() == 40 || lb1JObject.GetValue($"pubsubchattype{i}").Value<int>() == 48;
-                            trigger.founder = lb1JObject.GetValue($"pubsubchattype{i}").Value<int>() == 2;
-                            trigger.message = "*";
-                            trigger.moderator = lb1JObject.GetValue($"pubsubchattype{i}").Value<int>() == 1;
-                            trigger.vip = lb1JObject.GetValue($"pubsubchattype{i}").Value<int>() == 8 || lb1JObject.GetValue($"pubsubchattype{i}").Value<int>() == 40;
-                            trigger.broadcaster = lb1JObject.GetValue($"pubsubchattype{i}").Value<int>() == 16 || lb1JObject.GetValue($"pubsubchattype{i}").Value<int>() == 48;
-                            trigger.allow_empty_wildcard = false;
-                            break;
-                        case 4:
-                            trigger.trg = 3;
-                            trigger.minimum = lb1JObject.GetValue($"pubsubhostmin{i}").Value<int>();
-                            trigger.maximum = lb1JObject.GetValue($"pubsubhostmax{i}").Value<int>();
-                            break;
-                        case 5:
-                            trigger.trg = 3;
-                            trigger.minimum = lb1JObject.GetValue($"pubsubhostmin{i}").Value<int>();
-                            trigger.maximum = lb1JObject.GetValue($"pubsubhostmax{i}").Value<int>();
-                            break;
-                        case 6:
-                            trigger.trg = 3;
-                            trigger.redeemname = lb1JObject.GetValue($"pubsubredeem{i}").Value<string>();
-                            trigger.message = lb1JObject.GetValue($"pubsubredeemmessage{i}").Value<string>();
-                            trigger.requireinput = true;
-                            trigger.allow_empty_wildcard = false;
-                            trigger.case_sensitive = false;
-                            break;
-                        case 8:
-                            trigger.trg = 2;
-                            trigger.tier1 = true;
-                            trigger.tier2 = true;
-                            trigger.tier3 = true;
-                            trigger.minimum = lb1JObject.GetValue($"pubsubsubsmin{i}").Value<int>();
-                            trigger.maximum = lb1JObject.GetValue($"pubsubsubsmax{i}").Value<int>();
-                            break;
+                        Lb2Button.triggers.Add(trigger);
                     }
-
-                    Lb2Button.triggers.Add(trigger);
                 }
 
-                for (int i = 1; i < keyPressCount; i++)
+                for (var i = 1; i < keyPressCount; i++)
                 {
                     var command = new Command();
                     command.KeyboardCommand(lb1JObject, i, Lb2Button.command_list.Count);
@@ -355,18 +280,20 @@ namespace Lioranboard_1_Json_to_2.ViewModels
                     Lb2Button.command_list.Add(command);
                 }
 
-                for (int i = 1; i < soundCount; i++)
+                for (var i = 1; i < soundCount; i++)
                 {
                     var command = new Command();
                     command.SoundCommand(lb1JObject, i, Lb2Button.command_list.Count);
                     Lb2Button.command_list.Add(command);
 
-                    if (lb1JObject.GetValue($"soundpitch{i}").Value<int>() != 100)
+                    if (Parser.GetInt(lb1JObject.GetValue($"soundpitch{i}")) == 100)
                     {
-                        var speedCommand = new Command();
-                        speedCommand.SoundSpeedCommand(lb1JObject, i, Lb2Button.command_list.Count);
-                        Lb2Button.command_list.Add(speedCommand);
+                        continue;
                     }
+
+                    var speedCommand = new Command();
+                    speedCommand.SoundSpeedCommand(lb1JObject, i, Lb2Button.command_list.Count);
+                    Lb2Button.command_list.Add(speedCommand);
                 }
 
                 if (lb1JObject.ContainsKey("stopsoundfade"))
@@ -403,7 +330,7 @@ namespace Lioranboard_1_Json_to_2.ViewModels
                     MessageBox.Show("Button converted! (not all functions are supported, please double check the button once imported).\r\n\r\n Please be aware that the Button ID will not import and will take whatever the next available ID is. Please go into the button to edit the ID as needed.", "LB1 to LB2 Success!", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 _notifier.ShowError("Error occurred during the Conversion");
                 MessageBox.Show("There was an error processing the LB1 JSON. Please check the export and try again",

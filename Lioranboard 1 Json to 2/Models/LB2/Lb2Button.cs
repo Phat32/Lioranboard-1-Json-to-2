@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lioranboard_1_Json_to_2.Helper;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Lioranboard_1_Json_to_2.Classes.LB2
 {
@@ -51,6 +53,34 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
             border = 2;
             functions = 64;
             init_variable = "";
+        }
+
+        public Lb2Button(JObject lb1JObject)
+        {
+            command_list = new List<Command>();
+            triggers = new List<Lb2Trigger>();
+            release_list = new List<Command>();
+
+            image = "";
+            group_id = "";
+            switch_deck = "";
+            width = 0.1;
+            height = 0.1;
+            x = 0.1;
+            y = 0.1;
+            persistent = 1;
+            border = 2;
+            functions = 64;
+            init_variable = "";
+
+
+            color = lb1JObject.GetValue("color").Value<int>();
+            text = lb1JObject.GetValue("text").Value<string>();
+            border = lb1JObject.GetValue("border_size").Value<int>();
+            button_id = lb1JObject.GetValue("button_id").Value<string>();
+            group_id = lb1JObject.GetValue("group_id").Value<string>();
+            image = lb1JObject.GetValue("picture").Value<string>();
+            queueable = Parser.GetInt(lb1JObject.GetValue("pubsubqueue"));
         }
 
         public int color
