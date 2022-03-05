@@ -258,7 +258,7 @@ namespace Lioranboard_1_Json_to_2.ViewModels
                 for (var i = 0; i < triggerCount; i++)
                 {
                     var trigger = new Lb2Trigger(lb1JObject, i);
-                    if (trigger.trg  > 0 && !Lb2Button.triggers.Contains(trigger))
+                    if (trigger.trg >= 0 && !Lb2Button.triggers.Contains(trigger))
                     {
                         Lb2Button.triggers.Add(trigger);
                     }

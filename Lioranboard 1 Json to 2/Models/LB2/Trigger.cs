@@ -134,7 +134,7 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                         case "!timeout":
                         case "!untimedout":
                         case "!clearchat":
-                            trg = 0;
+                            trg = -1;
                             break;
                         default:
                             trg = 12;
