@@ -297,7 +297,7 @@ namespace Lioranboard_1_Json_to_2.Helper
 
                 //Send To Extension
                 case 71:
-                    return 0;
+                    return -15;
 
                 //TODO: Identify
                 case 72:

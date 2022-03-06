@@ -272,6 +272,10 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
         {
             switch (cmd)
             {
+                case -15:
+                    CommentCommand(lb1JObject, position, "Extensions have been redone and this does not import easily. Please remake this command.");
+                    break;
+
                 case -14:
                     CommentCommand(lb1JObject, position, "Save Replay Buffer was removed as command in LB2 but is still useable via the Custom Packet Command");
                     break;

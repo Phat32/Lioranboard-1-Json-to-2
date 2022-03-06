@@ -240,7 +240,13 @@ namespace Lioranboard_1_Json_to_2.ViewModels
                         }
 
                         previousCommand.v2 = (int) previousCommand.v2 + 1;
-                        previousCommand.v0 = (int) previousCommand.v0 - 1;
+
+                        if (previousCommand.cmd == 7)
+                        {
+                            previousCommand.v0 = (int) previousCommand.v0 - 1;
+                        }
+
+
                         previousCommand.xpan += 25;
                     }
                     else
