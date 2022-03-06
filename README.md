@@ -31,3 +31,6 @@ The converted JSON will be automatically copied to your clipboard and displayed 
 To convert another button either press the Clear JSON button or replace the text in the first box with the new JSON and press convert again, it will replace the text in the converted box.
 
 If you're mass converting buttons the popup can get rather annoying rather quickly, so a checkbox has been added to disable the popup. All warnings are still in effect of course.
+
+# Special Thanks
+I just wanted to give special thanks to Melonax from the LB Discord. Her knowledge of LB, testing and notes on the coverter have massively helped to get the converter to where it is! Thank you!
