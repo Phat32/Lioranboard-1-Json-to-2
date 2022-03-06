@@ -7,10 +7,6 @@ A WPF tool to convert the exported JSON from Lioranboard 1 to the format used in
 - The pull values in Math: Trigger Pull aren't converted. Please look into these yourself and select what you need from the dropdown.
 - All Button commands are disabled by the converter as the button ID will not match and risks triggering the wrong button on accident. You can enable the commands again via the 'Off' check on the right.
 
-# Known Issues
-- Currently Nested If statements with And/Ors added to the nested If will cause the imported button to crash LB2 (working on a fix)
-- Exports prior to 1.44 will cause issues due to the Group ID not being present (fixed pending new release)
-
 # Usage
 Download the latest [release](https://github.com/Phat32/Lioranboard-1-Json-to-2/releases) (currently 0.0.10 at time of writing)
 
