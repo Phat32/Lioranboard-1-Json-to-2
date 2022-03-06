@@ -70,11 +70,11 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                     trg = 0;
                     var chatTypeId = Parser.GetInt(lb1JObject.GetValue($"pubsubchattype{index}").Value<int>());
 
-                    sub = chatTypeId == 4;
-                    case_sensitive = chatTypeId == 32 || chatTypeId == 40 || chatTypeId == 48;
-                    founder = chatTypeId == 2;
+                    sub = chatTypeId == 4 || chatTypeId == 36;
+                    case_sensitive = chatTypeId == 32 || chatTypeId == 33 || chatTypeId == 34 || chatTypeId == 36 || chatTypeId == 40 || chatTypeId == 48;
+                    founder = chatTypeId == 2 || chatTypeId == 34;
                     message = "*";
-                    moderator = chatTypeId == 1;
+                    moderator = chatTypeId == 1 || chatTypeId == 33;
                     vip = chatTypeId == 8 || chatTypeId == 40;
                     broadcaster = chatTypeId == 16 || chatTypeId == 48;
                     allow_empty_wildcard = false;

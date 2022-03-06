@@ -304,17 +304,12 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                     cmd = 161;
                     b0 = lb1JObject.GetValue($"websocketvalue1_{position}").Value<string>();
                     b1 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<string>();
-                    b2 = $"/${lb1JObject.GetValue($"websocketvalue3_{position}").Value<string>()}$/";
-
-                    if (!Parser.GetBool(lb1JObject.GetValue($"websocketvalue4_{position}")))
-                    {
-                        b2 = $"\"{b2}\"";
-                    }
+                    b2 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<string>();
 
                     switch (b1)
                     {
                         case "= String":
-                            b1 = "==";
+                            b1 = "=";
                             break;
                         case "+= String":
                             b1 = "+=";
@@ -378,7 +373,7 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                     b1 = lb1JObject.GetValue($"websocketvalue2_{position}").Value<string>();
                     b2 = lb1JObject.GetValue($"websocketvalue3_{position}").Value<string>();
                     
-                    if (!Parser.GetBool(lb1JObject.GetValue($"websocketvalue4_{position}")))
+                    if (!Parser.GetBool(lb1JObject.GetValue($"websocketvalue4_{position}")) && b1.ToString().Contains("String"))
                     {
                         b2 = $"\"{b2}\"";
                     }
@@ -386,7 +381,7 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
                     switch (b1)
                     {
                         case "= String":
-                            b1 = "==";
+                            b1 = "=";
                             break;
                         case "+= String":
                             b1 = "+=";
