@@ -32,12 +32,16 @@
                  VerticalScrollBarVisibility="Auto" GotFocus="LB1Box_OnGotFocus" MouseDoubleClick="LB1Box_OnMouseDoubleClick" PreviewMouseLeftButtonDown="LB1Box_OnPreviewMouseLeftButtonDown"
                  KeyUp="LB1Box_OnKeyUp"/>
 
-        <CheckBox Grid.Row="2" Grid.Column="4" VerticalAlignment="Center" 
-                  IsChecked="{Binding ShowConvertedPopup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                  Content="Confirmation Popup" Margin="5,0,0,0" />
+        <CheckBox Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" 
+                  IsChecked="{Binding IsLocalVariable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  Content="Use Local Variable" Margin="5,0,0,0" />
 
         <Button Grid.Row="2" Grid.Column="1" Content="Clear JSON" Width="90" Padding="5,2,5,2" Command="{Binding ClearJsonCommand}" />
         <Button Grid.Row="2" Grid.Column="3" Content="Convert JSON" Width="90" Padding="5,2,5,2" Command="{Binding ConvertJsonCommand}" />
+
+        <CheckBox Grid.Row="2" Grid.Column="4" VerticalAlignment="Center" 
+                  IsChecked="{Binding ShowConvertedPopup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  Content="Confirmation Popup" Margin="5,0,0,0" />
 
         <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" TextAlignment="Center" Text="Converted Lioranboard 2 JSON" FontWeight="Bold" />
         <TextBox x:Name="LB2Box" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Padding="2" Text="{Binding Lb2Json, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5"

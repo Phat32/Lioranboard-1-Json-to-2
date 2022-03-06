@@ -75,7 +75,7 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
 
 
             color = lb1JObject.GetValue("color").Value<int>();
-            text = lb1JObject.GetValue("text").Value<string>().Replace("#", "\n");
+            text = lb1JObject.GetValue("text").Value<string>().Replace(@"\#", "<hash>").Replace("#", "\n").Replace("<hash>", @"\#");
             border = lb1JObject.GetValue("border_size").Value<int>();
             button_id = lb1JObject.GetValue("button_id").Value<string>();
             group_id = lb1JObject.GetValue("group_id").Value<string>();

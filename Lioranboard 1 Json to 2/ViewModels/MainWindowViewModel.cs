@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media;
 using Lioranboard_1_Json_to_2.Classes.LB2;
 using Lioranboard_1_Json_to_2.Helper;
 using Newtonsoft.Json.Linq;
@@ -16,6 +17,7 @@ namespace Lioranboard_1_Json_to_2.ViewModels
         private string _lb1Json;
         private string _lb2Json;
         private bool _showConvertedPopup;
+        private bool _isLocalVariable;
 
         public MainWindowViewModel()
         {
@@ -57,6 +59,15 @@ namespace Lioranboard_1_Json_to_2.ViewModels
                     ToastAlert("Keep in mind","Please remember to double check your buttons in LB2 after importing them", NotificationType.Warning);
                 }
             } 
+        }
+
+        public bool IsLocalVariable
+        {
+            get => _isLocalVariable;
+            set
+            {
+                SetProperty(ref _isLocalVariable, value);
+            }
         }
 
         public DelegateCommand ConvertJsonCommand { get; }
@@ -110,6 +121,11 @@ namespace Lioranboard_1_Json_to_2.ViewModels
 
                     if (command.cmd > 0)
                     {
+                        if (command.cmd == 161 && IsLocalVariable)
+                        {
+                            command.cmd = 15;
+                        }
+
                         Lb2Button.command_list.Add(command);
                     }
                     else if (command.cmd == -2 || command.cmd == -3)
