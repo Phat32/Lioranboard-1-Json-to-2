@@ -67,6 +67,11 @@ namespace Lioranboard_1_Json_to_2.ViewModels
             set
             {
                 SetProperty(ref _isLocalVariable, value);
+
+                if (_isLocalVariable)
+                {
+                    ToastAlert("Keep in mind", "LB1 used Global variables, just be aware of this fact when importing");
+                }
             }
         }
 
