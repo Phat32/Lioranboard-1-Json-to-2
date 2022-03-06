@@ -1,18 +1,20 @@
 # Lioranboard 1 Json to 2
 A WPF tool to convert the exported JSON from Lioranboard 1 to the format used in Lioranboard 2
 
-# This tool is a work in progress
-So far it seems to be working as expected but not everything has been fully tested. Please save often and check the buttons in LB2 before going too far and please report any issues you run across
+# Important things that you need to address post import to LB2
+- The variable system in LB2 works very different from LB1, allowing for local and global variables. The converter makes all variables global, as they were in LB1. For more info, check the [lioranboard.ca](https://lioranboard.ca) website.
+- In LB2, variables and arrays (stacks) need to be initialized before anything can be added to them. If your button crashes or doesn't work the way you want it to, this is likely why.
+- The pull values in Math: Trigger Pull aren't converted. Please look into these yourself and select what you need from the dropdown.
+- All Button commands are disabled by the converter as the button ID will not match and risks triggering the wrong button on accident. You can enable the commands again via the 'Off' check on the right.
 
 # Usage
-Super simple, download the latest [release](https://github.com/Phat32/Lioranboard-1-Json-to-2/releases) (currently 0.0.10 at time of writing)
+Download the latest [release](https://github.com/Phat32/Lioranboard-1-Json-to-2/releases) (currently 0.0.10 at time of writing)
 
 Extract the contents and run **Lioranboard 1 Json to 2.exe**
 
 The tool itself is super straight forward, 2 boxes and 2 buttons and a checkbox
 
 ![Screnshot of the tool](https://user-images.githubusercontent.com/10120690/156736325-43b69612-82f8-461c-8eb0-cb8f2a262842.png)
-
 
 Open Lioranboard 1 and find the button you want to copy to LB2, right click it and select **Export JSON** just near the bottom
 
@@ -24,12 +26,8 @@ With the exported button in your clipboard, paste that into the top text box abo
 
 ![Screenshot of the copied JSON in LB1to2](https://user-images.githubusercontent.com/10120690/156736684-aa2c5d1e-102c-4ea1-a603-cf8b8a54b3bc.png)
 
-
 The converted JSON will be automatically copied to your clipboard and displayed in the bottom window. Take this new JSON and import the JSON into LB2
 
 To convert another button either press the Clear JSON button or replace the text in the first box with the new JSON and press convert again, it will replace the text in the converted box.
 
 If you're mass converting buttons the popup can get rather annoying rather quickly, so a checkbox has been added to disable the popup. All warnings are still in effect of course.
-
-
-
