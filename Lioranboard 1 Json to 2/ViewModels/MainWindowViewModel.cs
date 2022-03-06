@@ -369,6 +369,7 @@ namespace Lioranboard_1_Json_to_2.ViewModels
             Lb1Json = string.Empty;
             Lb2Json = string.Empty;
             Lb2Button = new Lb2Button();
+            IsLocalVariable = false;
         }
     }
 }
