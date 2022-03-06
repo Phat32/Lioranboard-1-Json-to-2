@@ -82,6 +82,8 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
         private object _b58;
         private object _b59;
         private object _v0;
+        private object _v0_og;
+        private int _v0_and;
         private object _v1;
         private object _v2;
         private object _v3;
@@ -1663,7 +1665,25 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
         public object v0
         {
             get => _v0;
-            set => SetProperty(ref _v0, value);
+            set
+            {
+                SetProperty(ref _v0, value);
+                v0_og = v0;
+            }
+        }
+
+        [JsonIgnore]
+        public object v0_og
+        {
+            get => _v0_og;
+            set => SetProperty(ref _v0_og, value);
+        }
+
+        [JsonIgnore]
+        public int v0_and
+        {
+            get => _v0_and;
+            set => SetProperty(ref _v0_and, value);
         }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]

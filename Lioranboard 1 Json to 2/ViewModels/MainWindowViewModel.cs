@@ -137,9 +137,22 @@ namespace Lioranboard_1_Json_to_2.ViewModels
                     {
                         var previousCommand = Lb2Button.command_list.LastOrDefault();
 
-                        if (previousCommand == null)
+                        if (previousCommand.cmd != 7 && previousCommand.cmd != 12)
                         {
                             continue;
+                        }
+
+                        foreach (var searchCommand in Lb2Button.command_list.Where(x => x.cmd == 7 && x != previousCommand))
+                        {
+                            if (searchCommand.pos + (int) searchCommand.v0 - 1 + searchCommand.v0_and >= command.pos)
+                            {
+                                searchCommand.v0 = (int) searchCommand.v0 - 1;
+                                searchCommand.v0_and++;
+                            }
+                            else
+                            {
+                                searchCommand.v1 = (int)searchCommand.v1 - 1;
+                            }
                         }
 
                         switch (previousCommand.v2)
@@ -265,6 +278,7 @@ namespace Lioranboard_1_Json_to_2.ViewModels
                         if (previousCommand.cmd == 7)
                         {
                             previousCommand.v0 = (int) previousCommand.v0 - 1;
+                            previousCommand.v0_and++;
                         }
 
 

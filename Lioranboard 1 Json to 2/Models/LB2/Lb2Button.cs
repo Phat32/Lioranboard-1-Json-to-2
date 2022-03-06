@@ -78,7 +78,17 @@ namespace Lioranboard_1_Json_to_2.Classes.LB2
             text = lb1JObject.GetValue("text").Value<string>().Replace(@"\#", "<hash>").Replace("#", "\n").Replace("<hash>", @"\#");
             border = lb1JObject.GetValue("border_size").Value<int>();
             button_id = lb1JObject.GetValue("button_id").Value<string>();
-            group_id = lb1JObject.GetValue("group_id").Value<string>();
+
+            if (lb1JObject.ContainsKey("group_id"))
+            {
+                group_id = lb1JObject.GetValue("group_id").Value<string>();
+            }
+            else
+            {
+                group_id = "";
+            }
+
+            
             image = lb1JObject.GetValue("picture").Value<string>();
             queueable = Parser.GetInt(lb1JObject.GetValue("pubsubqueue"));
         }
