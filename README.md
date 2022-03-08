@@ -6,6 +6,7 @@ A WPF tool to convert the exported JSON from Lioranboard 1 to the format used in
 - In LB2, variables and arrays (stacks) need to be initialized before anything can be added to them. If your button crashes or doesn't work the way you want it to, this is likely why.
 - The pull values in Math: Trigger Pull aren't converted. Please look into these yourself and select what you need from the dropdown.
 - All Button commands are disabled by the converter as the button ID will not match and risks triggering the wrong button on accident. You can enable the commands again via the 'Off' check on the right.
+- Copy over your images folder from the LB1 folder to the LB2 folder to ensure any images used in buttons are still accessible. This will also resolve a crashing issue in LB2 prior to 2.07.2
 
 # Usage
 Download the latest [release](https://github.com/Phat32/Lioranboard-1-Json-to-2/releases) (currently 0.0.10 at time of writing)
