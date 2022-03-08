@@ -3,7 +3,7 @@ A WPF tool to convert the exported JSON from Lioranboard 1 to the format used in
 
 # Important things that you need to address post import to LB2
 - The variable system in LB2 works very different from LB1, allowing for local and global variables. The converter makes all variables global, as they were in LB1. For more info, check the [lioranboard.ca](https://lioranboard.ca/docs2/getting-started/migrating) website.
-- In LB2, variables and arrays (stacks) need to be initialized before anything can be added to them. If your button crashes or doesn't work the way you want it to, this is likely why.
+- In LB2, variables and arrays (stacks) need to be initialized before anything can be added to them. If your button crashes or doesn't work the way you want it to, this is likely why. check the [lioranboard.ca](https://lioranboard.ca/docs2/commands/variables#initvariables) website for more details.
 - The pull values in Math: Trigger Pull aren't converted. Please look into these yourself and select what you need from the dropdown.
 - All Button commands are disabled by the converter as the button ID will not match and risks triggering the wrong button on accident. You can enable the commands again via the 'Off' check on the right.
 - Copy over your images folder from the LB1 folder to the LB2 folder to ensure any images used in buttons are still accessible. This will also resolve a crashing issue in LB2 prior to 2.07.2
